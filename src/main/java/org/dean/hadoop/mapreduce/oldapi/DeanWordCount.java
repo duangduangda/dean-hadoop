@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.StringTokenizer;
 
 /**
- * map reduce old apo
+ * map reduce old api
  */
 public class DeanWordCount {
 
