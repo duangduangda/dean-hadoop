@@ -33,6 +33,7 @@ public class CityCountJob {
                 String duty = tokenizer.nextToken();
                 String salary = tokenizer.nextToken();
                 String city = tokenizer.nextToken();
+                logger.info("record:[" + id + "," + name + ","  + duty + "," +salary + "," + city + "]");
                 context.write(new Text(city),new IntWritable(1));
             }
         }
