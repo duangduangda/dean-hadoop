@@ -16,41 +16,6 @@ public class MTJoinReducer extends Reducer<Text,Text,Text,Text> {
 
     private static int time = 0;
 
-//    public void reduce(Text key,Iterable<Text> values,Context context) throws IOException,InterruptedException {
-//        if (time == 0) {
-//            context.write(new Text("factory"), new Text("address"));
-//            time++;
-//        }
-//        int factorynum = 0;
-//        String[]factory = new String[10];
-//        int addressnum = 0;
-//        String[]address = new String[10];
-//        Iterator<Text> iterator = values.iterator();
-//        while (iterator.hasNext()){
-//            String record = iterator.next().toString();
-//            int len = record.length();
-//            char type = record.charAt(0);
-//            if (type == '1'){
-//                factory[factorynum] = record.substring(2);
-//                factorynum++;
-//            }else{
-//                address[addressnum] = record.substring(2);
-//                addressnum++;
-//            }
-//        }
-//
-//        if (factorynum != 0 && addressnum != 0){
-//            for (int m = 0;m < factorynum;m++){
-//                for (int n = 0;n < addressnum;n++){
-//                    context.write(new Text(factory[m]), new Text(address[n]));
-//                }
-//            }
-//        }
-//
-//    }
-
-
-
     public void reduce(Text key,Iterable<Text> values,Context context) throws IOException,InterruptedException {
         if (time == 0) {
             context.write(new Text("factory"), new Text("address"));
