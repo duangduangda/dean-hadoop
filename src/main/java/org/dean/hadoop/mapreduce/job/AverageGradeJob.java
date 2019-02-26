@@ -1,4 +1,4 @@
-package org.dean.hadoop.mapreduce;
+package org.dean.hadoop.mapreduce.job;
 
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.DoubleWritable;
