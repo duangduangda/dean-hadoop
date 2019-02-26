@@ -21,5 +21,6 @@ public class FileSystemCat {
         }finally {
             IOUtils.closeStream(inputStream);
         }
+
     }
 }
