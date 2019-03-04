@@ -4,7 +4,9 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.dean.hadoop.mapreduce.mapper.STJoinMapper;
 import org.dean.hadoop.mapreduce.reducer.STJoinReducer;
 import org.slf4j.Logger;
@@ -30,6 +32,9 @@ public class STJoinJob {
 
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
+
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
 
         if (job.waitForCompletion(true)){
             logger.info("success");

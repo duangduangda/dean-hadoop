@@ -47,33 +47,6 @@ public class DeanWordCount {
         }
     }
 
-//    public static class SortPartitioner<K,V> extends Partitioner<K,V> {
-//        public int getPartition(K key,V value, int numReduceTasks) {
-//            int maxValue = 100;
-//            int keySection = 0;
-//            if (numReduceTasks > 1 && key.hashCode() < maxValue) {
-//                int sectionValue = maxValue / (numReduceTasks - 1);
-//                int count = 0;
-//                while ((key.hashCode()) - sectionValue * count > sectionValue){
-//                    count++;
-//                }
-//                keySection = numReduceTasks - 1 - count;
-//            }
-//            return keySection;
-//        }
-//    }
-
-//    public static class SortComparator extends WritableComparator {
-//        protected SortComparator(){
-//            super(IntWritable.class, true);
-//        }
-//
-//        public int compare(Writable a, Writable b){
-//            return -super.compare(a, b);
-//        }
-//
-//    }
-
     public static void main(String[] args) throws Exception{
         Job job = Job.getInstance();
         job.setJobName("dean word count");
@@ -85,8 +58,6 @@ public class DeanWordCount {
         job.setMapperClass(Map.class);
         job.setCombinerClass(Reduce.class);
         job.setReducerClass(Reduce.class);
-//        job.setPartitionerClass(SortPartitioner.class);
-//        job.setSortComparatorClass(SortComparator.class);
 
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
