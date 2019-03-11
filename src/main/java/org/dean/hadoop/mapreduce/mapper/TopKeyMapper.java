@@ -1,5 +1,6 @@
 package org.dean.hadoop.mapreduce.mapper;
 
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -14,7 +15,7 @@ import java.util.StringTokenizer;
  * @author: dean
  * @create: 2019/03/05 17:36
  */
-public class TopKeyMapper extends Mapper<LongWritable, Text,Text, Text> {
+public class TopKeyMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
     private static final Logger logger = LoggerFactory.getLogger(TopKeyMapper.class);
 
     public void map(LongWritable key,Text value,Context context) throws IOException,InterruptedException {
@@ -24,8 +25,7 @@ public class TopKeyMapper extends Mapper<LongWritable, Text,Text, Text> {
             String keyword = stringTokenizer.nextToken();
             String number = stringTokenizer.nextToken();
             logger.info("keyword:" + keyword + ",number:" + number);
-            context.write(new Text(number),new Text(keyword));
+            context.write(new Text(keyword),new IntWritable(Integer.parseInt(number)));
         }
-
     }
 }

@@ -14,13 +14,13 @@ import java.util.Iterator;
  * @author: dean
  * @create: 2019/03/05 17:41
  */
-public class TopKeyReducer extends Reducer<Text,Text,Text, IntWritable> {
+public class TopKeyReducer extends Reducer<Text, IntWritable, IntWritable, Text> {
     private static final Logger logger = LoggerFactory.getLogger(TopKeyReducer.class);
 
-    public void reduce(Text key,Iterable<Text> values,Context context) throws IOException,InterruptedException{
+    public void reduce(IntWritable key, Iterable<Text> values, Context context) throws IOException,InterruptedException{
         Iterator<Text> iterator = values.iterator();
         while (iterator.hasNext()){
-            context.write(iterator.next(),new IntWritable(Integer.parseInt(key.toString())));
+            context.write(key,iterator.next());
         }
     }
 }

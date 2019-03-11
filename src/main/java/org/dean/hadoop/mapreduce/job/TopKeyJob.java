@@ -27,25 +27,19 @@ public class TopKeyJob {
         Job job = Job.getInstance(configuration);
         job.setJobName(TopKeyJob.class.getName());
         job.setJarByClass(TopKeyJob.class);
-
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
-
         job.setMapperClass(TopKeyMapper.class);
         job.setReducerClass(TopKeyReducer.class);
-
-        job.setOutputKeyClass(Text.class);
+        job.setOutputKeyClass(IntWritable.class);
         job.setOutputValueClass(Text.class);
-
         FileInputFormat.addInputPath(job,new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
-
         boolean success = job.waitForCompletion(true);
         if (success){
             logger.info("success");
         }else{
             logger.info("failed");
         }
-
     }
 }
