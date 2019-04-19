@@ -20,9 +20,6 @@ public class LocalRunner {
                 return value % 2 != 0;
             }
         });
-
         result.print();
-
-
     }
 }
