@@ -31,9 +31,7 @@ public class WordCount {
         }).groupBy(0).sum(1);
 
         counters.print();
-        counters.writeAsCsv("/Users/dean");
-//        counters.writeAsCsv("hdfs://localhost:9001/user/dean/flink/example1/output/flink","\n","\t");
-        environment.execute();
+        environment.execute("Java WordCount from SocketTextStream Example");
 
     }
 }

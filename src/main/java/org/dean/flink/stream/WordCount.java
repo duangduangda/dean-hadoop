@@ -7,6 +7,8 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.Collector;
 
+import java.util.StringTokenizer;
+
 /**
  * @description: stream word counter
  * @author: dean
@@ -14,14 +16,15 @@ import org.apache.flink.util.Collector;
  */
 public class WordCount {
     public static void main(String[] args) throws Exception{
-        StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
-        DataStream<String> dataStream = environment.socketTextStream("localhost",9999,"\t",3);
+        final StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
+        // 在命令行执行nc -l 9999 开启数据交互
+        DataStream<String> dataStream = environment.socketTextStream("localhost",9999);
         dataStream.flatMap(new FlatMapFunction<String, Tuple2<String, Integer>>() {
                     public void flatMap(String value, Collector<Tuple2<String, Integer>> collector) throws Exception {
-//                        StringTokenizer stringTokenizer = new StringTokenizer(value,"\t");
-//                        while (stringTokenizer.hasMoreTokens()){
-//                            collector.collect(new Tuple2<String, Integer>(stringTokenizer.nextToken(),1));
-//                        }
+                        StringTokenizer stringTokenizer = new StringTokenizer(value,"\t");
+                        while (stringTokenizer.hasMoreTokens()){
+                            collector.collect(new Tuple2<String, Integer>(stringTokenizer.nextToken(),1));
+                        }
                         collector.collect(new Tuple2<String, Integer>(value,1));
                     }
                 })
