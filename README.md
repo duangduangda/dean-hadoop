@@ -1,1 +1,1 @@
-this is a java project developed with hadoop framework
+this is a java project developed with hadoop and flink framework
