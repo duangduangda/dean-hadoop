@@ -11,11 +11,11 @@ import org.apache.flink.util.Collector;
 import java.util.StringTokenizer;
 
 /**
- * @description: stream word counter
+ * @description: 来自socket的数据流词频统计
  * @author: dean
  * @create: 2019/03/16 20:38
  */
-public class WordCount {
+public class SocketResourceWordCount {
 
     public static void main(String[] args) throws Exception {
         // set up the streaming execution environment
@@ -30,6 +30,7 @@ public class WordCount {
                 .sum(1);
 
         sum.print();
+        // stream必须显式指定execute
         env.execute("Java WordCount from SocketTextStream Example");
     }
 
