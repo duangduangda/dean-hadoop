@@ -17,7 +17,7 @@ import java.util.StringTokenizer;
 public class TextResourceWordCount {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
-        DataStream<Tuple2<String, Integer>> dataStream = environment.readTextFile("/Users/yaohua.dong/hadoop-2.8.5/script/input/file1.txt").flatMap(new FlatMapFunction<String, Tuple2<String, Integer>>() {
+        DataStream<Tuple2<String, Integer>> dataStream = environment.readTextFile("/Users/dean/hadoop-2.8.5/script/input/file1.txt").flatMap(new FlatMapFunction<String, Tuple2<String, Integer>>() {
             public void flatMap(String value, Collector<Tuple2<String, Integer>> collector) {
                 StringTokenizer stringTokenizer = new StringTokenizer(value,"\n");
                 while (stringTokenizer.hasMoreTokens()){
