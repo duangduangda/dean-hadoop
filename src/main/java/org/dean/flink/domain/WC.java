@@ -1,4 +1,4 @@
-package org.dean.flink.table;
+package org.dean.flink.domain;
 
 import com.google.common.base.MoreObjects;
 

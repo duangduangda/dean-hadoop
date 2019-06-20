@@ -15,7 +15,7 @@ import java.util.Properties;
 public class KafkaResourceWordCount {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
-        DataStream<String> kafkaDataStream = environment.addSource(new FlinkKafkaConsumer011<>("test",new SimpleStringSchema(),getKafkaProperties()));
+        DataStream<String> kafkaDataStream = environment.addSource(new FlinkKafkaConsumer011<>("consumer_test",new SimpleStringSchema(),getKafkaProperties()));
         kafkaDataStream.print();
         environment.execute("Java word count with kafka data stream.");
     }
