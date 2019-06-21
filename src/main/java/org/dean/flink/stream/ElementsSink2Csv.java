@@ -13,7 +13,7 @@ public class ElementsSink2Csv {
         StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
         environment
                 .fromElements(new Tuple2<>("eric",1), new Tuple2<>("duang",2),new Tuple2<>("hello",3),new Tuple2<>("flink",4),new Tuple2<>("scala",5))
-                .filter(value -> value.f1 % 2 == 0).forceNonParallel().writeAsCsv("/Users/dean/hello");
+                .filter(value -> value.f1 % 2 == 0).writeAsCsv("/Users/yaohua.dong/test").setParallelism(1);
         environment.execute("Sink to csv file");
     }
 }

@@ -21,7 +21,8 @@ public class ElementsSink2Hdfs {
         dataMap.put(3,"Scala");
         dataMap.put(4,"Java");
         DataStream<Map<Integer,String>> mapDataStream = environment.fromElements(dataMap);
-        mapDataStream.writeAsText("hdfs://master:9000/user/dean/flink/input", FileSystem.WriteMode.OVERWRITE);
+        // 输出到hdfs，并设置并发数，生成单一文件
+        mapDataStream.writeAsText("hdfs://127.0.0.1:9001/user/dean/flink/example3/data", FileSystem.WriteMode.OVERWRITE).setParallelism(1);
         environment.execute("Element from collection sink to hdfs");
     }
 }
