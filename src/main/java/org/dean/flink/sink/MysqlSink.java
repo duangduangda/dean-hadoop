@@ -2,8 +2,9 @@ package org.dean.flink.sink;
 
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
+import org.dean.flink.util.JDBCUtils;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 /**
@@ -25,21 +26,15 @@ public class MysqlSink extends RichSinkFunction<String> {
     @Override
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
-        connection = getConnection();
+        connection = JDBCUtils.getConnection();
         String sql = "insert into word_count values(?,?);";
-        ps = this.connection.prepareStatement(sql);
+        ps = JDBCUtils.getPreparedStatement(connection,sql);
     }
 
     @Override
     public void close() throws Exception {
         super.close();
-        //关闭连接和释放资源
-        if (connection != null) {
-            connection.close();
-        }
-        if (ps != null) {
-            ps.close();
-        }
+        JDBCUtils.close(connection,ps);
     }
 
     /**
@@ -59,19 +54,6 @@ public class MysqlSink extends RichSinkFunction<String> {
         ps.executeUpdate();
     }
 
-    /**
-     * 获取数据库连接
-     * @return
-     */
-    private static Connection getConnection() {
-        Connection con = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8", "root", "");
-        } catch (Exception e) {
-            System.out.println("-----------mysql get connection has exception , msg = "+ e.getMessage());
-        }
-        return con;
-    }
+
 }
 
