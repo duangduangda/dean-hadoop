@@ -23,18 +23,20 @@ public class TableSqlQuery{
         StreamTableEnvironment tableEnvironment = StreamTableEnvironment.getTableEnvironment(environment);
         // 初始化数据源
         DataStream<WC> dataStream = environment.fromElements(
-                WC.build().setWord("Hello").setCount(1),
-                WC.build().setWord("Scala").setCount(2),
-                WC.build().setWord("Flink").setCount(3));
-        // 注册数据源table
-        tableEnvironment.registerDataStream("word_table",dataStream,"comment");
+                WC.build().setWord("Hello").setCounter(1),
+                WC.build().setWord("Scala").setCounter(2),
+                WC.build().setWord("Flink").setCounter(3));
+        // 注册数据源table，设置filed的时候不能使用sql语句的关键字，否则执行sql失败
+        tableEnvironment.registerDataStream("word_table",dataStream,"word as content,counter");
         // 执行query,获取结果集table
-        Table table = tableEnvironment.sqlQuery("select * from word_table where count &lt; 1");
+        Table table = tableEnvironment.sqlQuery("select * from word_table where content = 'Hello'");
         tableEnvironment.registerTableSink("csv_table",
                 new CsvTableSink("/Users/dean/csv",
                         ",",
-                        1, FileSystem.WriteMode.OVERWRITE).configure(new String[]{"content"},new TypeInformation[]{Types.STRING}));
+                        1, FileSystem.WriteMode.OVERWRITE).configure(new String[]{"content","counter"},new TypeInformation[]{Types.STRING,Types.INT}));
         table.insertInto("csv_table");
+        // 输出到控制台。使用TypeExtrator.createTypeInfo，查询的字段必须和pojo中的命名一致
+//        tableEnvironment.toAppendStream(table, TypeExtractor.createTypeInfo(WC.class) ).print();
         environment.execute();
     }
 }

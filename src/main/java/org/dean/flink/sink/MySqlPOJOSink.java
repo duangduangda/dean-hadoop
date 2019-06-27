@@ -73,7 +73,7 @@ public class MySqlPOJOSink extends RichSinkFunction<List<WC>> {
         //使用批量插入
         for (WC wc:values){
             ps.setString(1,wc.getWord());
-            ps.setInt(2,wc.getCount());
+            ps.setInt(2,wc.getCounter());
             ps.addBatch();
         }
 
