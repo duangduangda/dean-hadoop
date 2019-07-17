@@ -17,7 +17,7 @@ public class SortWithSql {
     public static void main(String[] args) throws Exception {
         ExecutionEnvironment environment = ExecutionEnvironment.getExecutionEnvironment();
         BatchTableEnvironment tableEnvironment = BatchTableEnvironment.getTableEnvironment(environment);
-        DataSet<Community> communityDataSet = environment.readCsvFile("/Users/yaohua.dong/communities.csv")
+        DataSet<Community> communityDataSet = environment.readCsvFile("/Users/dean/communities.csv")
                 .lineDelimiter("\n")
                 .fieldDelimiter(",")
                 .ignoreFirstLine()
