@@ -2,7 +2,7 @@ package org.dean.flink.sink;
 
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
-import org.dean.flink.util.JDBCUtils;
+import org.dean.toolkit.JDBCUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +26,7 @@ public class MysqlSink extends RichSinkFunction<String> {
     @Override
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
-        connection = JDBCUtils.getConnection();
+        connection = JDBCUtils.getConnection("jdbc:mysql://localhost:3306/test","root","");
         String sql = "insert into word_count values(?,?);";
         ps = JDBCUtils.getPreparedStatement(connection,sql);
     }

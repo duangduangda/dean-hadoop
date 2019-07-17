@@ -20,11 +20,12 @@ public class TableDataSetConvertor {
                 new WC("Hello", 1),
                 new WC("zhisheng", 1),
                 new WC("Hello", 1));
-        Table table = tEnv.fromDataSet(input);
+        Table table = tEnv.fromDataSet(input,"word,counter");
         Table filtered = table
                 .groupBy("word")
-                .select("word, count.sum as count")
-                .filter("count >= 1");
+                .select("word, counter.sum as counter")
+                .filter("counter >= 1");
+        // 如果sql查询的结果集最终转化为WC，那么select里的字段别名必须和WC中的一致
         DataSet<WC> result = tEnv.toDataSet(filtered, WC.class);
         result.print();
     }
