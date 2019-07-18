@@ -7,7 +7,7 @@ import org.apache.flink.table.api.java.BatchTableEnvironment;
 import org.dean.flink.domain.WC;
 
 /**
- * @description:
+ * @description: table转dataset
  * @author: dean
  * @create: 2019/06/14 22:45
  */

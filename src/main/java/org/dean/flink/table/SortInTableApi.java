@@ -9,11 +9,11 @@ import org.apache.flink.types.Row;
 import org.dean.flink.domain.Community;
 
 /**
- * @description: 使用sql进行排序（排序目前仅适用于批数据，流数据还无法进行排序）
+ * @description: 使用table api进行排序（排序目前仅适用于批数据，流数据还无法进行排序）
  * @author: dean
  * @create: 2019/07/02 19:22
  */
-public class SortWithSql {
+public class SortInTableApi {
     public static void main(String[] args) throws Exception {
         ExecutionEnvironment environment = ExecutionEnvironment.getExecutionEnvironment();
         BatchTableEnvironment tableEnvironment = BatchTableEnvironment.getTableEnvironment(environment);

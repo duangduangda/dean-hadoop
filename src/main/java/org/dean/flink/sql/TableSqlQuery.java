@@ -1,4 +1,4 @@
-package org.dean.flink.table;
+package org.dean.flink.sql;
 
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.common.typeinfo.Types;
