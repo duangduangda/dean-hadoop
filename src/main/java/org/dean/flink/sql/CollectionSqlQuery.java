@@ -11,11 +11,11 @@ import org.apache.flink.table.sinks.CsvTableSink;
 import org.dean.flink.domain.WC;
 
 /**
- * @description: 使用sql接口查询，并输出去至csv文件
+ * @description: 数据源是element或者collection，通过sql api查询并输出去至csv文件
  * @author: dean
  * @create: 2019/06/24 14:06
  */
-public class TableSqlQuery{
+public class CollectionSqlQuery{
     public static void main(String[] args) throws Exception{
         // 获取stream运行环境
         StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
